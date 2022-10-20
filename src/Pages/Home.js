@@ -108,6 +108,21 @@ class Home extends React.Component {
         }
     }
 
+    async stakeTeam() {
+        const provider = this.state.provider;
+		await provider.send("eth_requestAccounts", []);
+        const signer = this.state.signer;
+        const chainId = await signer.getChainId();
+        if(chainId != 1) {
+            // pop up error if network not ethereum
+            // ALERT PLEASE SWITCH TO ETHEREUM NETWORK TO CONTINUE
+        } else {
+            let stakeAmount = 100000; //  amount to bet from input
+            let poolId = 0  // 0 or 1 selected team from input
+            this.state.aegisStakingInteractionContract.stake(poolId, amount);
+        }
+    }
+
     async getStakedBalance() {
         const teamAStakedBalance = this.state.aegisStakingContract.getUserStakedTokens(this.state.signerAddress,0);
         const teamBStakedBalance = this.state.aegisStakingContract.getUserStakedTokens(this.state.signerAddress,1);
