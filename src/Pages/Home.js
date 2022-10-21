@@ -169,6 +169,18 @@ class Home extends React.Component {
         });
     }
 
+    async claimPrize() {
+        const provider = this.state.provider;
+		await provider.send("eth_requestAccounts", []);
+        const signer = this.state.signer;
+        const chainId = await signer.getChainId();
+        if(chainId != 1) {
+            // pop up error if network not ethereum
+            // ALERT PLEASE SWITCH TO ETHEREUM NETWORK TO CONTINUE
+        }
+        this.state.aegisStakingInteractionContract.claimPrize();
+    }
+
     render() {
         return (
             <div>
