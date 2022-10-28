@@ -10,7 +10,9 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
 
-        const ethProvider = new ethers.providers.getDefaultProvider("mainnet");
+        // const ethProvider = new ethers.providers.getDefaultProvider("mainnet");
+        const ethProvider = new ethers.providers.getDefaultProvider("https://eth-mainnet.public.blastapi.io	");
+
         const aegisStakingCA = "0xFeEf664bB59814c5842A3129CD3dCf28f02Fe679";
         const aegisTokenCA = "0x3e4c87bf57d48935d1643A7b8a3383B928B040de";
 
@@ -51,10 +53,10 @@ class Home extends React.Component {
     async start() {
         await this.connectWallet();
 
-        await this.enableStaking(); //Apply to button
+        // await this.enableStaking(); //Apply to button
         // await this.getStakedBalance(); //Apply to button
-        await this.getTeamOdds();
-        await this.getPotentialWinnings();
+        // await this.getTeamOdds();
+        // await this.getPotentialWinnings();
 
         console.log('state', this.state);
     }
@@ -87,9 +89,6 @@ class Home extends React.Component {
     }
 
     async getAccountBalance(address) {
-        if(!address)
-            address = this.state.signerAddress;
-        
         return ethers.utils.formatUnits(await this.state.aegisTokenContract.balanceOf(address));
     }
 
@@ -119,7 +118,7 @@ class Home extends React.Component {
         } else {
             let stakeAmount = 100000; //  amount to bet from input
             let poolId = 0  // 1 or 2 selected team from input
-            this.state.aegisStakingInteractionContract.stake(poolId, amount);
+            this.state.aegisStakingInteractionContract.stake(poolId, stakeAmount);
         }
     }
 
@@ -192,7 +191,7 @@ class Home extends React.Component {
         } else {
             let unstakeAmount = 100000; //  amount to bet from input
             let poolId = 0  // 1 or 2 selected team from input
-            this.state.aegisStakingInteractionContract.unstake(poolId, amount);
+            this.state.aegisStakingInteractionContract.unstake(poolId, unstakeAmount);
         }
     }
 
