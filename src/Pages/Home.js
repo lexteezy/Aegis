@@ -13,7 +13,7 @@ class Home extends React.Component {
         // const ethProvider = new ethers.providers.getDefaultProvider("mainnet");
         const ethProvider = new ethers.providers.getDefaultProvider("https://eth-mainnet.public.blastapi.io	");
 
-        const aegisStakingCA = "0xFeEf664bB59814c5842A3129CD3dCf28f02Fe679";
+        const aegisStakingCA = "0xE7d9747404532A1AEFd1Bf9D878aF1E859a51544";
         const aegisTokenCA = "0x3e4c87bf57d48935d1643A7b8a3383B928B040de";
 
         const aegisStakingContract = new ethers.Contract(
@@ -55,7 +55,7 @@ class Home extends React.Component {
 
         // await this.enableStaking(); //Apply to button
         // await this.getStakedBalance(); //Apply to button
-        // await this.getTeamOdds();
+        await this.getTeamOdds();
         // await this.getPotentialWinnings();
 
         console.log('state', this.state);
@@ -136,7 +136,7 @@ class Home extends React.Component {
 
     async getTeamOdds() {
         const poolAStakedTokens = ethers.utils.formatUnits(await this.state.aegisStakingContract.getPoolAStakedTokens());
-        const poolBStakedTokens = ethers.utils.formatUnits(await this.state.aegisStakingContract.getPoolAStakedTokens());
+        const poolBStakedTokens = ethers.utils.formatUnits(await this.state.aegisStakingContract.getPoolBStakedTokens());
         // const poolAStakedTokens = 22;
         // const poolBStakedTokens = 33;
 
